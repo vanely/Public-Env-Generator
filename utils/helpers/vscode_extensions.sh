@@ -35,6 +35,7 @@ EXTENSIONS_LIST_IDS=(
   mongodb.mongodb-vscode
   monokai.theme-monokai-pro-vscode
   mooman219.rust-assist
+  ms-dotnettools.csdevkit
   ms-vscode.powershell
   ms-vscode.atom-keybindings
   pkief.material-icon-theme
@@ -76,6 +77,7 @@ EXTENSIONS_LIST_NAMES=(
   'MongoDB Visualizer For VSCode'
   'Monokai_Pro'
   'Rust_Assist'
+  'C#_Dev_Kit'
   'PowerShell_Support'
   'Atom_Keybindings'
   'Material_Icon_Theme'
