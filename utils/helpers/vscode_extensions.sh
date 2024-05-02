@@ -17,45 +17,47 @@ source "${ROOT_FS_LOCATION}/utils/helpers/validation.sh"
 
 # Back & Forward Buttons - nick-rudenko.back-n-forth 
 EXTENSIONS_LIST_IDS=(
-  azuretools.vscode-docker
-  blackboxapp.blackbox
-  bungcip.better-toml
-  christian-kohler.path-intellisense
-  coenraads.bracket-pair-colorizer-2
-  dbaeumer.vscode-eslint
-  eamodio.gitlens
-  esbenp.prettier-vscode
-  exodiusstudios.comment-anchors
-  formulahendry.code-runner
-  jetmartin.bats
-  ms-vsliveshare.vsliveshare
-  mads-hartmann.bash-ide-vscode
-  massi.javascript-docstrings
-  matklad.rust-analyzer
-  mongodb.mongodb-vscode
-  monokai.theme-monokai-pro-vscode
-  mooman219.rust-assist
-  ms-dotnettools.csdevkit
-  ms-vscode.powershell
-  ms-vscode.atom-keybindings
-  pkief.material-icon-theme
-  hoovercj.vscode-power-mode
-  ritwickdey.liveserver
-  rogalmic.bash-debug
-  rust-lang.rust
-  rangav.vscode-thunder-client
-  timonwong.shellcheck
+  'azuretools.vscode-docker'
+  'blackboxapp.blackbox'
+  'bungcip.better-toml'
+  'christian-kohler.path-intellisense'
+  'coenraads.bracket-pair-colorizer-2'
+  'dbaeumer.vscode-eslint'
+  'eamodio.gitlens'
+  'esbenp.prettier-vscode'
+  'exodiusstudios.comment-anchors'
+  'formulahendry.code-runner'
+  'golang.go'
+  'jetmartin.bats'
+  'ms-vsliveshare.vsliveshare'
+  'mads-hartmann.bash-ide-vscode'
+  'massi.javascript-docstrings'
+  'matklad.rust-analyzer'
+  'mongodb.mongodb-vscode'
+  'monokai.theme-monokai-pro-vscode'
+  'mooman219.rust-assist'
+  'ms-dotnettools.csdevkit'
+  'ms-vscode.powershell'
+  'ms-vscode.atom-keybindings'
+  'pkief.material-icon-theme'
+  'hoovercj.vscode-power-mode'
+  'ritwickdey.liveserver'
+  'rogalmic.bash-debug'
+  'rust-lang.rust'
+  'rangav.vscode-thunder-client'
+  '4ops.terraform'
+  'timonwong.shellcheck'
 
   ############################### THEMES ###############################
   
-  beardedbear.beardedicons
-  beardedbear.beardedtheme
-  d3ciph3r3r.boundless-gray
-  impavan.theme-editor
-  inksea.inksea-theme
-  jdinhlife.gruvbox
-  n0us.all-gray
-  pkief.material-icon-theme
+  'beardedbear.beardedicons'
+  'beardedbear.beardedtheme'
+  'd3ciph3r3r.boundless-gray'
+  'impavan.theme-editor'
+  'inksea.inksea-theme'
+  'jdinhlife.gruvbox'
+  'n0us.all-gray'
+  'pkief.material-icon-theme'
 )
 
 EXTENSIONS_LIST_NAMES=(
@@ -69,6 +71,7 @@ EXTENSIONS_LIST_NAMES=(
   'Prettier'
   'Comment_Anchors'
   'Code_Runner'
+  'Go Lang Support'
   'Bash_Automated_Testing'
   'Live Share'
   'Bash_IDE'
@@ -85,6 +88,7 @@ EXTENSIONS_LIST_NAMES=(
   'Live_Server'
   'Bash_Debug'
   'Rust'
+  'Terraform Support'
   'Thunder Client(Requests to API)'
   'SpellCheck'
 
