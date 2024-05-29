@@ -87,6 +87,7 @@ file system.
 
 [] challenge repos aren't being cloned to respective directories
 [] option 1: in first menu of scripts(Update Directory Tree) isn't displaying base dirs to update
+[] Bug: user selection inputs are not being read as numbers
 _____________________________________________________________________________________________________
 VS CODE EXTENSIONS TO ADD:
   - Jest

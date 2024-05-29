@@ -1,0 +1,30 @@
+{
+  "WorkSpace": {
+    "Challenges": {
+      "JS": {
+        "repo": "",
+        "repo-visibility": "public"
+      },
+      "Go": {
+        "repo": "",
+        "repo-visibility": "public"
+      },
+      "Python": {
+        "repo": "",
+        "repo-visibility": "public"
+      },
+      "Rust": {
+        "repo": "",
+        "repo-visibility": "public"
+      }
+    },
+    "Scripts": {
+      "Practice": {},
+      "Projects": {}
+    },
+    "Web": {
+      "Practice": {},
+      "Projects": {}
+    }
+  }
+}
