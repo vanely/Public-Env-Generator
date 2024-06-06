@@ -56,4 +56,42 @@ remove_dir_from_path() {
   fi
 }
 
-remove_dir_from_path
+# remove_dir_from_path
+
+#!/bin/bash
+
+# Function to derive the directory location of the script
+get_script_dir() {
+  local script_path="${BASH_SOURCE[0]}"
+  local script_dir
+
+  # Resolve symbolic links
+  while [ -h "$script_path" ]; do
+    script_dir="$(cd -P "$(dirname "$script_path")" >/dev/null 2>&1 && pwd)"
+    script_path="$(readlink "$script_path")"
+    [[ "$script_path" != /* ]] && script_path="$script_dir/$script_path"
+  done
+
+  script_dir="$(cd -P "$(dirname "$script_path")" >/dev/null 2>&1 && pwd)"
+  echo "$script_dir"
+}
+
+test_engen_location() {
+  # Set ROOT_FS_LOCATION to the script directory
+  ROOT_FS_LOCATION=$(get_script_dir)
+
+  # Ensure the environment variable is set in the user's profile
+  if [[ -z $(grep "ENGEN_FS_LOCATION" ~/.profile) ]]; then
+    echo "export ENGEN_FS_LOCATION='${ROOT_FS_LOCATION}'" >> ~/.profile
+    # Reload the profile to apply changes
+    source ~/.profile
+  fi
+
+  # Example usage of ROOT_FS_LOCATION
+  # source "${ROOT_FS_LOCATION}/env-creation/generate_directory_tree.sh"
+
+  echo "Script directory is: $ROOT_FS_LOCATION"
+  echo "ENGEN_FS_LOCATION is: $ENGEN_FS_LOCATION"
+}
+
+test_engen_location

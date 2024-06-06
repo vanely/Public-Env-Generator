@@ -52,6 +52,11 @@ find_path_to_engen() {
   echo "final path: [ ${final_path} ]"
 }
 
+# used to set all global variables when engen is initially run
+set_global_variables() {
+  echo "pass"
+}
+
 # will to convert find to array to get first output
 # file_search_arr=$(print_file_system_search "${HOME}" "engen" "d")
 # file_search_arr=$(print_file_system_search "${HOME}" ".profile" "f")

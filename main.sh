@@ -3,35 +3,72 @@
 # so far it seems like or imports, I have to add this function at the top of every file
 # is it then worth it to pass this reference to the below scripts
 
-ROOT_FS_LOCATION=""
+# Function to derive the directory location of the script
+get_script_dir() {
+  local script_path="${BASH_SOURCE[0]}"
+  local script_dir
 
-if [[ -z $(grep "ENGEN_FS_LOCATION" ~/.profile) ]] ; then
-  REMOVED_FINAL_DIR="$(cd "$(dirname "${0}")" && pwd)"
-  echo export ENGEN_FS_LOCATION="'${REMOVED_FINAL_DIR}'" >> ~/.profile
-fi
+  # Resolve symbolic links
+  while [ -h "$script_path" ]; do
+    script_dir="$(cd -P "$(dirname "$script_path")" >/dev/null 2>&1 && pwd)"
+    script_path="$(readlink "$script_path")"
+    [[ "$script_path" != /* ]] && script_path="$script_dir/$script_path"
+  done
 
+  script_dir="$(cd -P "$(dirname "$script_path")" >/dev/null 2>&1 && pwd)"
+  echo "$script_dir"
+}
 
-if [[ -z ${ROOT_FS_LOCATION} ]]; then
+# Set ROOT_FS_LOCATION to the script directory
+ROOT_FS_LOCATION=$(get_script_dir)
+
+# Ensure the environment variable is set in the user's profile
+if [[ -z $(grep "ENGEN_FS_LOCATION" ~/.profile) ]]; then
+  echo "export ENGEN_FS_LOCATION='${ROOT_FS_LOCATION}'" >> ~/.profile
+  # Reload the profile to apply changes
   source ~/.profile
-  ROOT_FS_LOCATION="${ENGEN_FS_LOCATION}"
 fi
 
-# spellcheck source="${ROOT_FS_LOCATION}/env-creation/generate_directory_tree.sh"
-source "${ROOT_FS_LOCATION}/env-creation/generate_directory_tree.sh"
-# spellcheck source="${ROOT_FS_LOCATION}/env-creation/directories.sh"
-source "${ROOT_FS_LOCATION}/env-creation/directories.sh"
-# spellcheck source="${ROOT_FS_LOCATION}/programs-to-install/linux/choose_programs_and_install.sh"
-source "${ROOT_FS_LOCATION}/programs-to-install/linux/choose_programs_and_install.sh"
-# spellcheck source="${ROOT_FS_LOCATION}/utils/cleanup/main.sh"
-source "${ROOT_FS_LOCATION}/utils/cleanup/main.sh"
-# spellcheck source="${ROOT_FS_LOCATION}/utils/git-utils/main.sh"
-source "${ROOT_FS_LOCATION}/utils/git-utils/main.sh"
-# spellcheck source="${ROOT_FS_LOCATION}/utils/helpers/vscode_extensions.sh"
-source "${ROOT_FS_LOCATION}/utils/helpers/vscode_extensions.sh"
-# spellcheck source="${ROOT_FS_LOCATION}/utils/helpers/validation.sh"
-source "${ROOT_FS_LOCATION}/utils/helpers/validation.sh"
-# spellcheck source="${ROOT_FS_LOCATION}/utils/helpers/helpers.sh"
-source "${ROOT_FS_LOCATION}/utils/helpers/helpers.sh"
+# Example usage of ROOT_FS_LOCATION
+# source "${ROOT_FS_LOCATION}/env-creation/generate_directory_tree.sh"
+
+export ROOT_FS_LOCATION
+
+# Function to import scripts
+import_script() {
+  local script_path="${ROOT_FS_LOCATION}/$1"
+  
+  if [ -f "$script_path" ]; then
+    source "$script_path"
+  else
+    echo "Error: Unable to source script. File not found: $script_path"
+  fi
+}
+# # spellcheck source="${ROOT_FS_LOCATION}/env-creation/generate_directory_tree.sh"
+# source "${ROOT_FS_LOCATION}/env-creation/generate_directory_tree.sh"
+# # spellcheck source="${ROOT_FS_LOCATION}/env-creation/directories.sh"
+# source "${ROOT_FS_LOCATION}/env-creation/directories.sh"
+# # spellcheck source="${ROOT_FS_LOCATION}/programs-to-install/linux/choose_programs_and_install.sh"
+# source "${ROOT_FS_LOCATION}/programs-to-install/linux/choose_programs_and_install.sh"
+# # spellcheck source="${ROOT_FS_LOCATION}/utils/cleanup/main.sh"
+# source "${ROOT_FS_LOCATION}/utils/cleanup/main.sh"
+# # spellcheck source="${ROOT_FS_LOCATION}/utils/git-utils/main.sh"
+# source "${ROOT_FS_LOCATION}/utils/git-utils/main.sh"
+# # spellcheck source="${ROOT_FS_LOCATION}/utils/helpers/vscode_extensions.sh"
+# source "${ROOT_FS_LOCATION}/utils/helpers/vscode_extensions.sh"
+# # spellcheck source="${ROOT_FS_LOCATION}/utils/helpers/validation.sh"
+# source "${ROOT_FS_LOCATION}/utils/helpers/validation.sh"
+# # spellcheck source="${ROOT_FS_LOCATION}/utils/helpers/helpers.sh"
+# source "${ROOT_FS_LOCATION}/utils/helpers/helpers.sh"
+
+import_script "env-creation/generate_directory_tree.sh"
+import_script "env-creation/directories.sh"
+import_script "programs-to-install/linux/choose_programs_and_install.sh"
+import_script "utils/cleanup/main.sh"
+import_script "utils/git-utils/main.sh"
+import_script "utils/helpers/vscode_extensions.sh"
+import_script "utils/helpers/validation.sh"
+import_script "utils/helpers/helpers.sh"
 
 # can either be 
 CONTEXT_ROOT_DIR_NAME="${1}"
