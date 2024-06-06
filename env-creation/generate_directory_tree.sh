@@ -111,7 +111,7 @@ set_base_directory_name() {
     # build_config_file
     EXISTING_CONFIG="$(print_file_system_search "${HOME}" "$(build_config_file "${EXISTING_CONFIG_SUFFIX}")" "f")"
     echo "EXISTING_CONFIG: ${EXISTING_CONFIG}"
-    CURRENT_BASE_DIR="$(readlink -m "${HOME}/""${EXISTING_CONFIG_SUFFIX}")"
+    CURRENT_BASE_DIR="$(readlink "${HOME}/""${EXISTING_CONFIG_SUFFIX}")"
     # check git creds or prompt for them here
     config_git_creds_and_auth "${EXISTING_CONFIG}"
   elif [[ "${CASE_INSENSITIVE_BOOL}" == "n" ]] ; then
@@ -129,17 +129,17 @@ set_base_directory_name() {
     if [[ -z "${BASE}" ]] ; then
       # using the below readlink command normalizes the dir path and prevents occassional double slash
       BASE="PracticeSpace"
-      CURRENT_BASE_DIR="$(readlink -m "${HOME}/"${BASE})"
+      CURRENT_BASE_DIR="$(readlink "${HOME}/"${BASE})"
     else
       # using the below readlink command normalizes the dir path and prevents occassional double slash
-      CURRENT_BASE_DIR="$(readlink -m "${HOME}/"${BASE})"
+      CURRENT_BASE_DIR="$(readlink "${HOME}/"${BASE})"
     fi
 
     # file search
     while [[ -d "${CURRENT_BASE_DIR}" ]]
     do
       echo
-      echo "$(readlink -m "${HOME}/"${BASE}) already exists!"
+      echo "$(readlink "${HOME}/"${BASE}) already exists!"
       echo "Please choose another name, or enter 'exit' to exit script."
       echo -n "> "
       read -r BASE
@@ -148,12 +148,12 @@ set_base_directory_name() {
         exit
       elif [[ -z "${BASE}" ]] ; then
         # using the below readlink command normalizes the dir path and prevents occassional double slash
-        CURRENT_BASE_DIR="$(readlink -m "${HOME}/"PracticeSpace)"
+        CURRENT_BASE_DIR="$(readlink "${HOME}/"PracticeSpace)"
         break
         # file search
       elif [[ ! -d "${HOME}/${BASE}" ]] ; then
         # using the below readlink command normalizes the dir path and prevents occassional double slash
-        CURRENT_BASE_DIR="$(readlink -m "${HOME}/""${BASE}")"
+        CURRENT_BASE_DIR="$(readlink "${HOME}/""${BASE}")"
         break
       fi
     done
