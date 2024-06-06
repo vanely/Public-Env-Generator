@@ -17,50 +17,55 @@ source "${ROOT_FS_LOCATION}/utils/helpers/validation.sh"
 
 # Back & Forward Buttons - nick-rudenko.back-n-forth 
 EXTENSIONS_LIST_IDS=(
-  'azuretools.vscode-docker'
-  'blackboxapp.blackbox'
-  'bungcip.better-toml'
-  'christian-kohler.path-intellisense'
-  'coenraads.bracket-pair-colorizer-2'
-  'dbaeumer.vscode-eslint'
-  'eamodio.gitlens'
-  'esbenp.prettier-vscode'
-  'exodiusstudios.comment-anchors'
-  'formulahendry.code-runner'
-  'golang.go'
-  'jetmartin.bats'
-  'ms-vsliveshare.vsliveshare'
-  'mads-hartmann.bash-ide-vscode'
-  'massi.javascript-docstrings'
-  'matklad.rust-analyzer'
-  'mongodb.mongodb-vscode'
-  'monokai.theme-monokai-pro-vscode'
-  'mooman219.rust-assist'
-  'ms-dotnettools.csdevkit'
-  'ms-vscode.powershell'
-  'ms-vscode.atom-keybindings'
-  'pkief.material-icon-theme'
-  'hoovercj.vscode-power-mode'
-  'ritwickdey.liveserver'
-  'rogalmic.bash-debug'
-  'rust-lang.rust'
-  'rangav.vscode-thunder-client'
-  '4ops.terraform'
-  'timonwong.shellcheck'
+  andenetalexander.vim-cheatsheet
+  azuretools.vscode-docker
+  blackboxapp.blackbox
+  bungcip.better-toml
+  christian-kohler.path-intellisense
+  coenraads.bracket-pair-colorizer-2
+  dbaeumer.vscode-eslint
+  eamodio.gitlens
+  esbenp.prettier-vscode
+  exodiusstudios.comment-anchors
+  formulahendry.code-runner
+  golang.go
+  jetmartin.bats
+  ms-vsliveshare.vsliveshare
+  mads-hartmann.bash-ide-vscode
+  massi.javascript-docstrings
+  matklad.rust-analyzer
+  mongodb.mongodb-vscode
+  monokai.theme-monokai-pro-vscode
+  mooman219.rust-assist
+  ms-dotnettools.csdevkit
+  ms-vscode.powershell
+  ms-vscode.atom-keybindings
+  pkief.material-icon-theme
+  hoovercj.vscode-power-mode
+  ritwickdey.liveserver
+  rogalmic.bash-debug
+  rust-lang.rust
+  4ops.terraform
+  rangav.vscode-thunder-client
+  timonwong.shellcheck
+  vintharas.learn-vim
+  vscodevim.vim
 
   ############################### THEMES ###############################
   
-  'beardedbear.beardedicons'
-  'beardedbear.beardedtheme'
-  'd3ciph3r3r.boundless-gray'
-  'impavan.theme-editor'
-  'inksea.inksea-theme'
-  'jdinhlife.gruvbox'
-  'n0us.all-gray'
-  'pkief.material-icon-theme'
+  beardedbear.beardedicons
+  beardedbear.beardedtheme
+  d3ciph3r3r.boundless-gray
+  impavan.theme-editor
+  inksea.inksea-theme
+  jdinhlife.gruvbox
+  n0us.all-gray
+  pkief.material-icon-theme
+  sainnhe.gruvbox-material
 )
 
 EXTENSIONS_LIST_NAMES=(
+  'Vim Cheatsheet'
   'Docker'
   'BlackBox(AI Code Helper)'
   'Better_TOML'
@@ -91,6 +96,8 @@ EXTENSIONS_LIST_NAMES=(
   'Terraform Support'
   'Thunder Client(Requests to API)'
   'SpellCheck'
+  'Learn Vim(vim tutor)'
+  'Vim Emulator'
 
   ############################### THEMES ###############################
 
@@ -102,6 +109,7 @@ EXTENSIONS_LIST_NAMES=(
   'Gruvbox_Theme'
   'All_Gray'
   'Material_Icon_Theme'
+  'Material_Gruvbox'
 )
 EXTENSIONS_LIST_NAMES_LEN="${#EXTENSIONS_LIST_NAMES[@]}"
 INSTALLS_ARR=($(code --list-extensions))
