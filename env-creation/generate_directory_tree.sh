@@ -25,7 +25,7 @@ source "${ROOT_FS_LOCATION}/utils/helpers/helpers.sh"
 
 # reference to existing config
 EXISTING_CONFIG=""
-# CURRENT_BASE_DIR="" referenced from directories.sh
+GLOBAL_REF_TO_BASE=""
 
 # export CURRENT_BASE_DIR dir to be referenced globally
 # arg1=CURRENT_BASE_DIR_NAME
@@ -133,6 +133,7 @@ set_base_directory_name() {
     else
       # using the below readlink command normalizes the dir path and prevents occassional double slash
       CURRENT_BASE_DIR="$(readlink "${HOME}/"${BASE})"
+      GLOBAL_REF_TO_BASE="${BASE}"
     fi
 
     # file search
@@ -272,8 +273,8 @@ create_directories() {
       BASE_DIR_NAME="${DIR_NAMES[3]}"
     fi
     echo "[--DEBUG--]: calling 'create_and_update_dir_paths' with params: "
-    echo "${HOME}/$(build_config_file "${BASE_DIR_NAME}"), new"
-    create_and_update_dir_paths "${HOME}/$(build_config_file "${BASE_DIR_NAME}")" "new"
+    echo "${HOME}/$(build_config_file "${GLOBAL_REF_TO_BASE}"), new"
+    create_and_update_dir_paths "${HOME}/$(build_config_file "${GLOBAL_REF_TO_BASE}")" "new"
     echo
     echo "NOTE: config file in home directory: ${HOME}/$(build_config_file "${BASE_DIR_NAME}")"
     echo

@@ -53,23 +53,47 @@ generate_config_file() {
 
   # change to ".engenrc_${1}" omit the ".sh"
   CONFIG_FILE_NAME=".engenrc_${1}"
+  echo "[--DEBUG--] Config file name: ${CONFIG_FILE_NAME}"
 
   # copy the template, and add the name of the new dir tree to it
   # paths here needs to also be relative to main.sh execution script
   # copy ""./config-file-templates/.engenrc_template"
   cp "${ROOT_FS_LOCATION}/config-file-templates/.engenrc_template" "${ROOT_FS_LOCATION}/config-file-templates/${CONFIG_FILE_NAME}"
 
-  ROOT_ENV_DIR_PATH="'${HOME}/${1}'"
+  # ROOT_ENV_DIR_PATH="'${HOME}/${1}'"
 
   # check for git creds in ~/.gitconfig or prompt for git creds here
   get_or_prompt_for_git_creds
   # make sure to use different delimeter when "/"s are included in replace text or escape the "/"
   # git creds
-  sed -i s/CURRENT_GIT_USER_NAME=/CURRENT_GIT_USER_NAME="${GIT_USER}"/ "${ROOT_FS_LOCATION}"/config-file-templates/"${CONFIG_FILE_NAME}"
-  sed -i s/CURRENT_GIT_EMAIL=/CURRENT_GIT_EMAIL="${GIT_EMAIL}"/ "${ROOT_FS_LOCATION}"/config-file-templates/"${CONFIG_FILE_NAME}"
+  # sed -i s/CURRENT_GIT_USER_NAME=/CURRENT_GIT_USER_NAME="${GIT_USER}"/ "${ROOT_FS_LOCATION}"/config-file-templates/"${CONFIG_FILE_NAME}"
+  # sed -i s/CURRENT_GIT_EMAIL=/CURRENT_GIT_EMAIL="${GIT_EMAIL}"/ "${ROOT_FS_LOCATION}"/config-file-templates/"${CONFIG_FILE_NAME}"
   # path info  sed -i s+CURATH=+CURRENT_BASE_DIR_PATH="${ROOT_ENV_DIR_PATHig--templates/"${CONFIG_FILE_NAME}"
-  sed -i s/CURRENT_BASE_DIR_NAME=/CURRENT_BASE_DIR_NAME="${1}"/ "${ROOT_FS_LOCATION}"/config-file-templates/"${CONFIG_FILE_NAME}"
-  sed -i s+CURRENT_BASE_DIR_PATH=+CURRENT_BASE_DIR_PATH="${HOME}/${1}"+ "${ROOT_FS_LOCATION}"/config-file-templates/"${CONFIG_FILE_NAME}"
+  # sed -i s/CURRENT_BASE_DIR_NAME=/CURRENT_BASE_DIR_NAME="${1}"/ "${ROOT_FS_LOCATION}"/config-file-templates/"${CONFIG_FILE_NAME}"
+  # sed -i s+CURRENT_BASE_DIR_PATH=+CURRENT_BASE_DIR_PATH="${HOME}/${1}"+ "${ROOT_FS_LOCATION}"/config-file-templates/"${CONFIG_FILE_NAME}"
+
+# Determine the appropriate sed command for the OS
+  case "$(uname -s)" in
+    Darwin)
+      # macOS
+      SED_CMD="sed -i ''"
+      ;;
+    Linux|MINGW*|MSYS*|CYGWIN*)
+      # Linux and Git Bash on Windows
+      SED_CMD="sed -i"
+      ;;
+    *)
+      echo "Unsupported OS: $(uname -s)"
+      return 1
+      ;;
+  esac
+
+  # Perform the replacements using the appropriate sed command
+  ${SED_CMD} "s/CURRENT_GIT_USER_NAME=/CURRENT_GIT_USER_NAME=${GIT_USER}/" "${ROOT_FS_LOCATION}/config-file-templates/${CONFIG_FILE_NAME}"
+  ${SED_CMD} "s/CURRENT_GIT_EMAIL=/CURRENT_GIT_EMAIL=${GIT_EMAIL}/" "${ROOT_FS_LOCATION}/config-file-templates/${CONFIG_FILE_NAME}"
+  ${SED_CMD} "s/CURRENT_BASE_DIR_NAME=/CURRENT_BASE_DIR_NAME=${1}/" "${ROOT_FS_LOCATION}/config-file-templates/${CONFIG_FILE_NAME}"
+  ${SED_CMD} "s+CURRENT_BASE_DIR_PATH=+CURRENT_BASE_DIR_PATH=${HOME}/${1}+" "${ROOT_FS_LOCATION}/config-file-templates/${CONFIG_FILE_NAME}"
+
 
   # move generated config to home dir
   # file search
