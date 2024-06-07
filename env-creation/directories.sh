@@ -15,8 +15,8 @@ update_dir_tree() {
   # import config file
   source "${1}"
 
-  local REF_TO_FS_LOCATION
-  REF_TO_FS_LOCATION="${2}"
+  # local REF_TO_FS_LOCATION
+  # REF_TO_FS_LOCATION="${2}"
 
   if [[ -f "${1}" ]] ; then
 
@@ -45,7 +45,8 @@ update_dir_tree() {
       for (( i=0; i<"${DIR_ARR_LEN}"; i++ ))
       do
         # if [[ -n "$(ls ${DIR_ARRAY[i]} 2> /dev/null)" ]] ; then
-        if [[ -d "${DIR_ARRAY[i]}" ]] ; then
+        # if [[ -d "${DIR_ARRAY[i]}" ]] ; then
+        if [[ "$(ls -A "${DIR_ARRAY[i]}")" ]]; then
           echo "========================================================================================="
           echo "No update needed for: ${DIR_ARRAY[i]}"
           echo "========================================================================================="
