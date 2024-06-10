@@ -37,29 +37,13 @@ export ROOT_FS_LOCATION
 # Function to import scripts
 import_script() {
   local script_path="${ROOT_FS_LOCATION}/$1"
-  
+
   if [ -f "$script_path" ]; then
     source "$script_path"
   else
     echo "Error: Unable to source script. File not found: $script_path"
   fi
 }
-# # spellcheck source="${ROOT_FS_LOCATION}/env-creation/generate_directory_tree.sh"
-# source "${ROOT_FS_LOCATION}/env-creation/generate_directory_tree.sh"
-# # spellcheck source="${ROOT_FS_LOCATION}/env-creation/directories.sh"
-# source "${ROOT_FS_LOCATION}/env-creation/directories.sh"
-# # spellcheck source="${ROOT_FS_LOCATION}/programs-to-install/linux/choose_programs_and_install.sh"
-# source "${ROOT_FS_LOCATION}/programs-to-install/linux/choose_programs_and_install.sh"
-# # spellcheck source="${ROOT_FS_LOCATION}/utils/cleanup/main.sh"
-# source "${ROOT_FS_LOCATION}/utils/cleanup/main.sh"
-# # spellcheck source="${ROOT_FS_LOCATION}/utils/git-utils/main.sh"
-# source "${ROOT_FS_LOCATION}/utils/git-utils/main.sh"
-# # spellcheck source="${ROOT_FS_LOCATION}/utils/helpers/vscode_extensions.sh"
-# source "${ROOT_FS_LOCATION}/utils/helpers/vscode_extensions.sh"
-# # spellcheck source="${ROOT_FS_LOCATION}/utils/helpers/validation.sh"
-# source "${ROOT_FS_LOCATION}/utils/helpers/validation.sh"
-# # spellcheck source="${ROOT_FS_LOCATION}/utils/helpers/helpers.sh"
-# source "${ROOT_FS_LOCATION}/utils/helpers/helpers.sh"
 
 import_script "env-creation/generate_directory_tree.sh"
 import_script "env-creation/directories.sh"
@@ -70,7 +54,7 @@ import_script "utils/helpers/vscode_extensions.sh"
 import_script "utils/helpers/validation.sh"
 import_script "utils/helpers/helpers.sh"
 
-# can either be 
+# can either be
 CONTEXT_ROOT_DIR_NAME="${1}"
 
 # similar to array of programs to install, present a choice of which main scripts to run
@@ -81,8 +65,8 @@ CONTEXT_ROOT_DIR_NAME="${1}"
 #   - [x] choose programs to install
 #
 # [x] git api tools
-#   - [x] create, 
-#   - [x] delete, 
+#   - [x] create,
+#   - [x] delete,
 #   - [x] update repo,
 #   - [x] check status
 #
@@ -97,7 +81,7 @@ update_current_dir_tree() {
   local REF_TO_FS_LOCATION
   CURRENT_ROOT_ENV_CONFIG="${HOME}/$(build_config_file "${CONTEXT_ROOT_DIR_NAME}")"
   REF_TO_FS_LOCATION="${1}"
-  
+
   # DEBUG: outputting the constructed config file to make sure it's in correct format
   echo "Current config file: ${CURRENT_ROOT_ENV_CONFIG}"
   # file search
@@ -147,7 +131,7 @@ echo -n "> "
 read -r process
 echo
 
-while "true" 
+while "true"
 do
   if [[ "$(input_is_number "${process}")" != "true" ]] ; then
     echo
@@ -157,7 +141,7 @@ do
     read -r process
   else
     # pass context down to each process and see if it gets properly consumed
-    # context needs to get to get to git_utils main.sh then to git_update_repos.sh 
+    # context needs to get to get to git_utils main.sh then to git_update_repos.sh
     if [[ "${process}" == "4" ]] ; then
       ${PROCESSES_ARRAY[process]} "${CONTEXT_ROOT_DIR_NAME}" "${ROOT_FS_LOCATION}" # <-- may not need to pass down fs location
     else

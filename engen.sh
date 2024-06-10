@@ -1,46 +1,6 @@
 #!/bin/bash
 
 DIR_NAME="${1}"
-get_script_dir() {
-  local script_path="${BASH_SOURCE[0]}"
-  local script_dir
-
-  # Resolve symbolic links
-  while [ -h "$script_path" ]; do
-    script_dir="$(cd -P "$(dirname "$script_path")" >/dev/null 2>&1 && pwd)"
-    script_path="$(readlink "$script_path")"
-    [[ "$script_path" != /* ]] && script_path="$script_dir/$script_path"
-  done
-
-  script_dir="$(cd -P "$(dirname "$script_path")" >/dev/null 2>&1 && pwd)"
-  echo "$script_dir"
-}
-
-# Set ROOT_FS_LOCATION to the script directory
-ROOT_FS_LOCATION=$(get_script_dir)
-
-# Ensure the environment variable is set in the user's profile
-if [[ -z $(grep "ENGEN_FS_LOCATION" ~/.profile) ]]; then
-  echo "export ENGEN_FS_LOCATION='${ROOT_FS_LOCATION}'" >> ~/.profile
-  # Reload the profile to apply changes
-  source ~/.profile
-fi
-
-# Example usage of ROOT_FS_LOCATION
-# source "${ROOT_FS_LOCATION}/env-creation/generate_directory_tree.sh"
-
-export ROOT_FS_LOCATION
-
-# Function to import scripts
-import_script() {
-  local script_path="${ROOT_FS_LOCATION}/$1"
-  
-  if [ -f "$script_path" ]; then
-    source "$script_path"
-  else
-    echo "Error: Unable to source script. File not found: $script_path"
-  fi
-}
 
 ROOT_FS_LOCATION=""
 if [[ -z ${ROOT_FS_LOCATION} ]]; then
