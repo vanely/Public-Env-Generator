@@ -5,4 +5,6 @@ def someFunc():
   dependencies.
 
 
-someFunc()
+if __name__ == "__main__":
+  someFunc()
+  
