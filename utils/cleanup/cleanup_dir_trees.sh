@@ -48,6 +48,22 @@ iteratively_remove_env_dirs() {
   echo -n "> "
   read -r indexes
 
+  # Determine the appropriate sed command for the OS
+  case "$(uname -s)" in
+    Darwin)
+      # macOS
+      SED_CMD="sed -i ''"
+      ;;
+    Linux|MINGW*|MSYS*|CYGWIN*)
+      # Linux and Git Bash on Windows
+      SED_CMD="sed -i"
+      ;;
+    *)
+      echo "Unsupported OS: $(uname -s)"
+      return 1
+      ;;
+  esac
+
   while "true"
   do
     if [[ "$(input_is_number_with_possible_spaces "${indexes}")" == "true" ]] ; then
@@ -81,7 +97,7 @@ iteratively_remove_env_dirs() {
           fi
           # remove env var by line number
           if [[ -n ${ENV_VAR_IN_PROFILE} ]] ; then
-            sed -i "${arr[0]}d" ~/.profile
+            ${SED_CMD} "${arr[0]}d" ~/.profile
           fi 
           echo "========================================================================================="
         elif [[ ! -d "${ENV_DIR_PATHS[i]}" ]] && [[ -n ${ENV_VAR_IN_PROFILE} ]] ; then
@@ -89,7 +105,7 @@ iteratively_remove_env_dirs() {
           echo "========================================================================================="
           echo "Removing exported variable for ${ENV_DIR_PATHS[i]}..."
           # remove env var by line number
-          sed -i "${arr[0]}d" ~/.profile
+          ${SED_CMD} "${arr[0]}d" ~/.profile
           echo "========================================================================================="
         fi
       done
