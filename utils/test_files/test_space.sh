@@ -8,6 +8,8 @@ print_file_system_search() {
   local search_token="${2}"
   local type="${3}"
 
+  # move all except excluded dirs using grep flags
+  # find ./ -maxdepth 1 -type d | grep -wv -e "folderOne" -e "folderTwo" | xargs -I '{}' mv {} ./destinationFoler 
   # doing strict search with "-w" passed into grep command
   local search=($(find "${location}" -maxdepth 2 -type "${type}" | grep -w "${search_token}"))
   echo "${search}"
