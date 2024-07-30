@@ -60,11 +60,16 @@ file system.
   - in both entry points, import function from helpers file that will allow engen to be found in file system
   - this function will run pwd and can potentially take an argument that decides where the slicing of the pwd path output ends
   - pass this reference down through the scripts that are invoked after similar to component props that are being passed down alreday
-  
+
+INSTALLS:
 [] add the following download steps to linux install list for AWS CLI install
   - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
   - unzip awscliv2.zip
   - udo ./aws/install
+
+[] other installs to add:
+  - docker: https://devcoops.com/install-docker-on-debian-11/
+  - kubernetes: https://devcoops.com/how-to-install-kubectl-on-mac/
 
 [] change the way programs are being checked if they are installed or not. 
   - Instead of "which" use the actual version of the program "EX: <program name> --version" to check if a program is installed
