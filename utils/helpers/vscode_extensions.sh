@@ -40,7 +40,6 @@ EXTENSIONS_LIST_IDS=(
   ms-dotnettools.csdevkit
   ms-vscode.powershell
   ms-vscode.atom-keybindings
-  pkief.material-icon-theme
   hoovercj.vscode-power-mode
   ritwickdey.liveserver
   rogalmic.bash-debug
@@ -88,7 +87,6 @@ EXTENSIONS_LIST_NAMES=(
   'C#_Dev_Kit'
   'PowerShell_Support'
   'Atom_Keybindings'
-  'Material_Icon_Theme'
   'Power_Mode'
   'Live_Server'
   'Bash_Debug'
